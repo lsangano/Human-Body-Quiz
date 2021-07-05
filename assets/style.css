@@ -35,47 +35,47 @@ P {
 /* ANSWER STYLIZATION */
 
 .btn-choice {
-  background: #D79922;
-  border-color:#EFE2BA;
-  color: #EFE2BA;
+  background: #1137e2e3;
+  border-color:#bad3ef;
+  color: #bad3ef;
 }
 
 .btn-choice:hover {
-  background: #EFE2BA;
-  border-color:#EFE2BA;
-  color: #D79922
+  background: #bad3ef;
+  border-color:#bad3ef;
+  color: #1137e2e3
 
 }
 
 /* BUTTON STYLIZATION */
 
 .btn-primary {
-  background: #EFE2BA;
-  border-color: #EFE2BA;
-  color: #D79922;
+  background: #bad3ef;
+  border-color: #bad3ef;
+  color: #1137e2e3;
   padding: 1rem;
 
 }
 
 .btn-success {
-  background: #D79922;
-  border-color: #D79922;
-  color: #EFE2BA;
+  background: #1137e2e3;
+  border-color: #1137e2e3;
+  color: #bad3ef;
   padding: 1rem;
 }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active {
-  background: #EFE2BA;
-  border-color: #D79922;
-  color:#D79922;
+  background: #bad3ef;
+  border-color: #1137e2e3;
+  color:#1137e2e3;
 }
 
 /* INPUT STYLIZATION */
 
 input {
-  border: 0.1rem solid #D79922;
-  background: #EFE2BA;
-  color: #D79922;
+  border: 0.1rem solid #1137e2e3;
+  background: #bad3ef;
+  color: #1137e2e3;
   margin-bottom: 1.5rem;
   padding: 1rem;
 }

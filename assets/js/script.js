@@ -1,17 +1,17 @@
-var backStatus = quizBody.dataset.stutus;
+var backStatus = quizBody.dataset.status;
 var bodyEl = document.body;
-var scritptEl = document.querySelector("script");
+var scriptEl = document.querySelector("script");
 var containerEl = document.querySelector(".container-fluid");
 
-var questionNun = document.querySelector("#question-number");
+var questionNum = document.querySelector("#question-number");
 var questionEL = document.querySelector("#question");
-var answerEL = document.querySelector('#answer-container');
+var answerEl = document.querySelector('#answer-container');
 
 var score = 0;
 var currentQuestion = 0;
 
-var minutesDisplay = document.querySelector("minutes");
-var secondsDisplay = document.querySelector("seconds");
+var minutesDisplay = document.querySelector("#minutes");
+var secondsDisplay = document.querySelector("#seconds");
 
 var totalSeconds = 60;
 var secondsElapsed = 0;
@@ -26,31 +26,31 @@ var prevScores;
 
 var questions = [
     
-    {
-        "question":"What is the heaviest organ in the human body?",
-        "choices": ["skin", "kidney", "liver", "heart"],
-        "correct":"skin"
+        {
+            "question":"What is the heaviest organ in the human body?",
+            "choices": ["skin", "kidney", "liver", "heart"],
+            "correct":"skin"
+        },
+        {
+            "question":"How many bones are there in an adult human body?",
+            "choices": ["78 bones", "152 bones", "188 bones", "206 bones"],
+            "correct":"206 bones"
     },
     {
-        "question":"How many bones are there in an adult human body?",
-        "choices": ["78 bones", "152 bones", "188 bones", "206 bones"],
-        "correct":"206 bones"
-},
-{
-       "question":"Where in the body is the smallest bone found?",
-        "choices": ["foot", "ear", "hand", "mouth"],
-        "correct":"ear"
-},
-{
-       "question":"What is the heaviest organ in the human body?",
-       "choices": ["55%", "66%", "75%", "80%"],
-       "correct":"66%"
-},
-{
-       "question":"At what rate does an average human being sneeze?",
-       "choices": ["50 miles per hour", "70 miles per hour", "85 miles per hour", "100 miles per hour"],
-       "correct":"100 miles per hour"
-}
+        "question":"Where in the body is the smallest bone found?",
+            "choices": ["foot", "ear", "hand", "mouth"],
+            "correct":"ear"
+    },
+    {
+        "question":"What is the heaviest organ in the human body?",
+        "choices": ["55%", "66%", "75%", "80%"],
+        "correct":"66%"
+    },
+    {
+        "question":"At what rate does an average human being sneeze?",
+        "choices": ["50 miles per hour", "70 miles per hour", "85 miles per hour", "100 miles per hour"],
+        "correct":"100 miles per hour"
+    }
 ];
 
 // QUIZ FUNCTIONALITY
@@ -58,7 +58,7 @@ var questions = [
 function renderQuestion() {
     var activeQuestion = questions[currentQuestion];
 
-    questionNun.textContent = `Question ${currentQuestion +1} of ${question.length}`;
+    questionNum.textContent = `Question ${currentQuestion +1} of ${question.length}`;
     questionEL.textContent = activeQuestion["question"];
 
     for (var i = 0; i < activeQuestion.choices.length; i++) {
@@ -68,9 +68,9 @@ function renderQuestion() {
             newBut.classList.add("answer", "btn", "btn-choice", "col-md-12");
             newBut.setAttribute("id", `answer-${i}`)
             newBut.textContent = activeQuestion.choices[i];
-            answerEL.append(newBut);
+            answerEl.append(newBut);
         } else {
-            answerEL.children[i].textContent = activeQuestion.choices[i];
+            answerEl.children[i].textContent = activeQuestion.choices[i];
 
         }
     }  
@@ -101,10 +101,13 @@ function getPreviousScore() {
 
     if (scoreData) {
         if (scoreData.previousInitials) {
-        prevScores.textContent = scoreData.previousScores;
+            prevInit.textContent = "Previous Score: " + scoreData.previousInitials;
+    }
+    if (scoreData.previousScore) {
+        prevScore.textContent = scoreData.previousScore;
     }
   } else {
-    prevInit.textContent = "Previous Score: ---";
+    prevInit.textContent = "Previous Score: ";
   } 
 }
 
@@ -125,7 +128,7 @@ function getPreviousScore() {
      // MODAL BUTTON ELEMENTS
      var newCont = document.createElement("main");
      newCont.classList.add("container-fluid");
-     bodyEl.insertBefore(newCont,scritptEl);
+     bodyEl.insertBefore(newCont,scriptEl);
 
      var scoreDiv = document.createElement("div");
      scoreDiv.classList.add("row");
@@ -164,7 +167,7 @@ function getPreviousScore() {
 
     getPreviousScore();
 
-    var buttonEL = document.createElement("div");
+    var buttonDiv = document.createElement("div");
     buttonDiv.classList.add("row")
     newCont.append(buttonDiv);
 
@@ -184,10 +187,10 @@ function getPreviousScore() {
     initDiv.classList.add("row");
     newCont.append(initDiv);
 
-    var speed3 = document.createElement("div");
-    var speed4 = document.createElement("div");
-    speed3.classList.add("col-md-1");
-    speed4.classList.add("col-md-1");
+    var space3 = document.createElement("div");
+    var space4 = document.createElement("div");
+    space3.classList.add("col-md-1");
+    space4.classList.add("col-md-1");
 
     initials = document.createElement("input");
     initials.classList.add("col-md-1");
@@ -198,9 +201,9 @@ function getPreviousScore() {
     initials.setAttribute("maxlength", "3");
     initials.setAttribute("placeholder", "Input Initial");
 
-    initDiv.appendChild(speed3);
+    initDiv.appendChild(space3);
     initDiv.appendChild(initials);
-    initDiv.appendChild(speed4);
+    initDiv.appendChild(space4);
 
     initials.addEventListener("keyup", setPreviousScore);
     initials.addEventListener("change", setPreviousScore);
@@ -233,8 +236,8 @@ function getPreviousScore() {
  
  
 function quizBackground() {
-    var color1 = "D79922"
-    var color2 = "EFE2BA"
+    var color1 = "#1137e2e3"
+    var color2 = "#bad3ef"
 
     if (backStatus == "home") {
         document.body.style.background = color1;
@@ -247,7 +250,7 @@ function quizBackground() {
 
 function startQuiz() {
     renderQuestion()
-    startTime();
+    startTimer();
 }
 
 // CALL FUNCTIONS
@@ -259,50 +262,51 @@ startQuiz();
 
 function setMinutes() {
     var secondsLeft = totalSeconds - secondsElapsed;
-    var minutesLeft = math.floor (secondsLeft/60)
+    var minutesLeft = Math.floor(secondsLeft/60);
     var formattedMinutes;
-
+  
     if (minutesLeft < 10) {
-        formattedMinutes= "0" + minutesLeft;
+      formattedMinutes = "0" + minutesLeft;
     } else {
-        formattedMinutes = minutesLeft
+      formattedMinutes = minutesLeft;
     }
     return formattedMinutes;
-    }
-function setSeconds() {
+  }
+  
+  function setSeconds() {
     var secondsLeft = (totalSeconds - secondsElapsed) % 60;
     var formattedSeconds;
-    
+  
     if (secondsLeft < 10) {
-        formattedSeconds = "0" + secondsLeft;
+      formattedSeconds = "0" + secondsLeft;
     } else {
-        formattedSeconds = secondsLeft;
+      formattedSeconds = secondsLeft;
     }
     return formattedSeconds;
- } 
-
+  }
+  
   function renderTime() {
-      minutesDisplay.textContent = setMinutes();
-      minutesDisplay.textContent = setSeconds();
-
-      if (secondsElapsed >= totalSeconds) {
-          gameOver();
-      }
-   }  
- 
+    minutesDisplay.textContent = setMinutes();
+    secondsDisplay.textContent = setSeconds();
+  
+    if (secondsElapsed >= totalSeconds) {
+        gameOver();
+    }
+  }
+  
   function startTimer() {
-      if (totalSeconds > 0){
-          interval = setInterval(function () {
-            secondsElapsed++;
-            renderTime();
-          }, 1000)
-       }
-    }  
+    if (totalSeconds > 0) {
+      interval = setInterval(function () {
+        secondsElapsed++;
+        renderTime();
+      }, 1000)
+    }
+  }
 
-// EVENT LISTENER
-answerEL.addEventListener("click", function(event) {
+//   EVENT LISTENER
+answerEl.addEventListener("click", function(event) {   
     answerChoice = event.target.textContent
     correctAnswer = questions[currentQuestion]["correct"];
-
+    
     checkAnswer(answerChoice, correctAnswer);
 })
